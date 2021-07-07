@@ -26,11 +26,10 @@ router.post("/", async (req, res) => {
 
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
 
-    res.send({
+    res.send({token: token}, {
     name: user.name,
     email: user.email,
-    token: token
-  });
+     });
 });
 
 module.exports = router;
