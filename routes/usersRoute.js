@@ -25,11 +25,12 @@ router.post("/", async (req, res) => {
   await user.save();
 
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
-
-    res.send({
+  
+  res.header("x-auth-token", token).send({
     name: user.name,
     email: user.email,
-     });
+    token: token
+  });
 });
 
 module.exports = router;
