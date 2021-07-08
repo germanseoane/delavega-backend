@@ -13,19 +13,19 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const result = validateAuth(req.body);
   if (result.error) {
-    res.status(400).send(result.error.message);
+    res.status(400).send({error: result.error.message});
     return;
   }
 
   let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Invalid email or password");
+  if (!user) return res.status(400).send({error: "Invalid email or password"});
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
     return res.status(400).send("Invalid email or password");
   }
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
-  res.send(token);
+  res.send({token: token , userName: user.name});
 });
 
 function validateAuth(user) {
