@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Invalid email or password");
   }
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
-  res.send({token: token , userName: user.name});
+  res.send({token: token , name: user.name});
 });
 
 function validateAuth(user) {
