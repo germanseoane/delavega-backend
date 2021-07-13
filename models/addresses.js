@@ -37,7 +37,7 @@ function validateAddress(address) {
     address: Joi.string().required(),
     phone: Joi.string().required(),
     city: Joi.string().required(),
-    country: Joi.string().required(),
+    country: Joi.string().min(2).required(),
   });
   return schema.validate(address);
 }
