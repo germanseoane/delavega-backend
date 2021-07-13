@@ -8,12 +8,12 @@ const bcrypt = require("bcrypt");
 router.post("/", async (req, res) => {
   const result = validateUser(req.body);
   if (result.error) {
-    res.status(400).send(result.error.message);
+    res.status(400).send({ error: result.error.message });
     return;
   }
 
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("User already registered.");
+  if (user) return res.status(400).send({ error: "User already registered." });
 
   user = new User({
     name: req.body.name,
@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
   res.header("x-auth-token", token).send({
     name: user.name,
     email: user.email,
+    token: token,
   });
 });
 

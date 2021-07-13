@@ -1,8 +1,2 @@
-POST http://localhost:5000/api/users
-Content-Type: application/json
 
-{
-    "name" : "german",
-    "email" : "german@gmail.com",
-    "password" : "polainas"
-}
+GET  http://localhost:5000/api/addresses/lolo

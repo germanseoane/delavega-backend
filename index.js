@@ -5,6 +5,7 @@ const connectDb = require("./mongoDb/connectDb");
 const productsRoute = require("./routes/productsRoute");
 const usersRoute = require("./routes/usersRoute");
 const authRoute = require("./routes/authRoute");
+const addressesRoute = require("./routes/addressesRoute");
 
 if (!process.env.delavega_jwtPrivateKey) {
   console.log("FATAL ERROR: jwtPrivateKey not defined");
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/api/products", productsRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/addresses", addressesRoute);
 
 connectDb();
 

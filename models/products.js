@@ -18,6 +18,18 @@ const productsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  images: {
+    type: Array,
+    required: true,
+  },
+  isFavourite: {
+    type: Boolean,
+    required: true,
+  },
+  qty: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Product = mongoose.model("product", productsSchema);
