@@ -8,12 +8,20 @@ const bcrypt = require("bcrypt");
 router.post("/", async (req, res) => {
   const result = validateUser(req.body);
   if (result.error) {
+<<<<<<< HEAD
     res.status(400).send({ error: result.error.message });
+=======
+    res.status(400).send({error: result.error.message});
+>>>>>>> e0f6f20165c12ea6d56c37d63db0e2878199dc62
     return;
   }
 
   let user = await User.findOne({ email: req.body.email });
+<<<<<<< HEAD
   if (user) return res.status(400).send({ error: "User already registered." });
+=======
+  if (user) return res.status(400).send({error: "User already registered."});
+>>>>>>> e0f6f20165c12ea6d56c37d63db0e2878199dc62
 
   user = new User({
     name: req.body.name,
@@ -25,7 +33,7 @@ router.post("/", async (req, res) => {
   await user.save();
 
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
-
+  
   res.header("x-auth-token", token).send({
     name: user.name,
     email: user.email,
