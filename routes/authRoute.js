@@ -8,17 +8,14 @@ const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   const result = validateAuth(req.body);
-  if (result.error) {
-<<<<<<< HEAD
+  if (result.error) { 
     res.status(400).send({ error: result.error.message });
-=======
-    res.status(400).send({error: result.error.message});
->>>>>>> e0f6f20165c12ea6d56c37d63db0e2878199dc62
+
     return;
   }
 
   let user = await User.findOne({ email: req.body.email });
-<<<<<<< HEAD
+
   if (!user)
     return res.status(400).send({ error: "Invalid email or password" });
 
@@ -28,7 +25,7 @@ router.post("/", async (req, res) => {
   }
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
   res.send({ email: user.email, name: user.name, token: token });
-=======
+
   if (!user) return res.status(400).send({error: "Invalid email or password"});
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
@@ -37,7 +34,7 @@ router.post("/", async (req, res) => {
   }
   const token = jwt.sign({ _id: user._id }, process.env.delavega_jwtPrivateKey);
   res.send({ email: user.email, name: user.name , token: token});
->>>>>>> e0f6f20165c12ea6d56c37d63db0e2878199dc62
+
 });
 
 function validateAuth(user) {
