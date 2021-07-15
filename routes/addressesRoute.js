@@ -38,4 +38,19 @@ router.post("/", async (req, res) => {
   });
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const deleteAddress = await Address.findOneAndDelete({
+      _id: req.params.id,
+    });
+    if (!deleteAddress) {
+      res.send({ error: "no address was found" });
+    } else res.send({ message: "Address deleted" });
+  } catch (err) {
+    console.log(err);
+    res.send({ error: "no address was found" });
+  }
+});
+
+
 module.exports = router;
